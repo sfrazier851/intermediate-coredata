@@ -15,6 +15,7 @@
 		7F6E7D3428987B5300363500 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F6E7D3328987B5300363500 /* Assets.xcassets */; };
 		7F6E7D3728987B5300363500 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6E7D3528987B5300363500 /* LaunchScreen.storyboard */; };
 		7F6E7D402898835400363500 /* UINavigationController+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7D3F2898835400363500 /* UINavigationController+ext.swift */; };
+		7F6E7D4828999DB000363500 /* UIColor+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7D4728999DB000363500 /* UIColor+ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		7F6E7D3628987B5300363500 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F6E7D3828987B5300363500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F6E7D3F2898835400363500 /* UINavigationController+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+ext.swift"; sourceTree = "<group>"; };
+		7F6E7D4728999DB000363500 /* UIColor+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				7F6E7D3828987B5300363500 /* Info.plist */,
 				7F6E7D3028987B5000363500 /* IntermediateCDTraining.xcdatamodeld */,
 				7F6E7D3F2898835400363500 /* UINavigationController+ext.swift */,
+				7F6E7D4728999DB000363500 /* UIColor+ext.swift */,
 			);
 			path = IntermediateCDTraining;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				7F6E7D3228987B5000363500 /* IntermediateCDTraining.xcdatamodeld in Sources */,
 				7F6E7D2828987B5000363500 /* AppDelegate.swift in Sources */,
 				7F6E7D2A28987B5000363500 /* SceneDelegate.swift in Sources */,
+				7F6E7D4828999DB000363500 /* UIColor+ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
