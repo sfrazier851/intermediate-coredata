@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = CustomNC(rootViewController: ViewController())
+        window?.rootViewController = CustomNC(rootViewController: CompaniesVC())
         window?.makeKeyAndVisible()
     }
 

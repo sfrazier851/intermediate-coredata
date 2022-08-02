@@ -7,10 +7,17 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class CompaniesVC: UITableViewController {
 
+    let companies = [
+        Company(name: "Google", founded: Date()),
+        Company(name: "Apple", founded: Date()),
+        Company(name: "Facebook", founded: Date())
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         
         navigationItem.title = "Companies"
@@ -37,7 +44,12 @@ class ViewController: UITableViewController {
     }
     
     @objc func handleAddCompany() {
-        print("Adding Company...")
+        
+        let createCompanyController = UINavigationController(rootViewController: CreateCompanyVC())
+        createCompanyController.modalPresentationStyle = .fullScreen
+        
+        present(createCompanyController, animated: true, completion: nil)
+        
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -54,7 +66,13 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
         
         cell.backgroundColor = .tealColor
-        cell.textLabel?.text = "THE COMPANY NAME"
+        
+        let company = companies[indexPath.row]
+        
+        let format = DateFormatter()
+        format.dateFormat = "MMM dd, yyyy"
+        
+        cell.textLabel?.text = company.name + " - " + format.string(from: company.founded)
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
@@ -62,7 +80,7 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return companies.count
     }
     
     override func viewWillAppear(_ animated: Bool) {
