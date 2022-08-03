@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CompaniesVC: UITableViewController, CreateCompanyVCDelegate {
 
@@ -16,12 +17,15 @@ class CompaniesVC: UITableViewController, CreateCompanyVCDelegate {
         tableView.insertRows(at: [newIndexPath], with: .automatic)
     }
     
+    var companies = [Company]()
+    
+    /*
     var companies = [
         Company(name: "Google", founded: Date()),
         Company(name: "Apple", founded: Date()),
         Company(name: "Facebook", founded: Date())
     ]
-    
+    */
     /*
     func addCompany(company name: String) {
         companies.append(Company(name: name, founded: Date()))
@@ -31,8 +35,29 @@ class CompaniesVC: UITableViewController, CreateCompanyVCDelegate {
     }
     */
     
+    private func fetchCompanies() {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Company")
+        
+        do {
+            let companies = try context.fetch(fetchRequest)
+            
+            companies.forEach({ (company) in
+                print((company as! Company).name!)
+            })
+            
+            self.companies = companies as! [Company]
+            self.tableView.reloadData()
+            
+        } catch let fetchErr {
+            print("Failed to fetch companies: ", fetchErr)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchCompanies()
         
         view.backgroundColor = .white
         
@@ -92,7 +117,8 @@ class CompaniesVC: UITableViewController, CreateCompanyVCDelegate {
         let format = DateFormatter()
         format.dateFormat = "MMM dd, yyyy"
         
-        cell.textLabel?.text = company.name + " - " + format.string(from: company.founded)
+        cell.textLabel?.text = company.name!// + " - " + format.string(from: company.founded)
+        //cell.textLabel?.text = "COMPANY NAME - FOUNDED DATE"
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
@@ -102,6 +128,8 @@ class CompaniesVC: UITableViewController, CreateCompanyVCDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return companies.count
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setStatusBar(backgroundColor: .lightRed)

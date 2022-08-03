@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 // Custom Delegation
 
@@ -63,14 +64,25 @@ class CreateCompanyVC: UIViewController {
     }
     
     @objc private func saveCompany() {
-        print("Saving Company")
-        dismiss(animated: true) {
-            guard let companyName = self.nameTextField.text else { return }
-            if companyName.count >= 3 {
-                //self.companiesVC?.addCompany(company: companyName)
-                self.delegate?.didAddCompany(company: Company(name: companyName, founded: Date()))
-            }
+        guard let companyName = self.nameTextField.text else { return }
+        
+        if companyName.count >= 3 {
+            let context = CoreDataManager.shared.persistentContainer.viewContext
             
+            let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
+            
+            company.setValue(companyName, forKey: "name")
+            
+            do {
+                try context.save()
+                
+                self.dismiss(animated: true) {
+                    self.delegate?.didAddCompany(company: company as! Company)
+                }
+                
+            } catch let saveErr {
+                print("Failed to save company: ", saveErr)
+            }
         }
     }
     
