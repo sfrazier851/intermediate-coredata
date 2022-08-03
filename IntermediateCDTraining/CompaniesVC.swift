@@ -7,13 +7,29 @@
 
 import UIKit
 
-class CompaniesVC: UITableViewController {
+class CompaniesVC: UITableViewController, CreateCompanyVCDelegate {
 
-    let companies = [
+    func didAddCompany(company: Company) {
+        companies.append(company)
+        
+        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
+    
+    var companies = [
         Company(name: "Google", founded: Date()),
         Company(name: "Apple", founded: Date()),
         Company(name: "Facebook", founded: Date())
     ]
+    
+    /*
+    func addCompany(company name: String) {
+        companies.append(Company(name: name, founded: Date()))
+        
+        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
+    */
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +61,14 @@ class CompaniesVC: UITableViewController {
     
     @objc func handleAddCompany() {
         
-        let createCompanyController = UINavigationController(rootViewController: CreateCompanyVC())
-        createCompanyController.modalPresentationStyle = .fullScreen
+        let createCompanyVC = CreateCompanyVC()
+        let createCompanyNC = UINavigationController(rootViewController: createCompanyVC)
+        createCompanyNC.modalPresentationStyle = .fullScreen
         
-        present(createCompanyController, animated: true, completion: nil)
+        //createCompanyVC.companiesVC = self
+        createCompanyVC.delegate = self
+        
+        present(createCompanyNC, animated: true, completion: nil)
         
     }
     
