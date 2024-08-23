@@ -1,1 +1,3 @@
 # intermediate-coredata
+
+## NOTES
